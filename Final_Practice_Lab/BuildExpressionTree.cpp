@@ -1,68 +1,134 @@
+//6630301021 Aphinan Thianhao
+
 #include <iostream>
 #include <string>
-#include <cctype>   // isalnum, isspace
-#include <cstring>  // strchr
 using namespace std;
 
-struct Node{
+struct Node {
     char value;
     struct Node *left;
     struct Node *right;
 };
 
-struct StackNode{
-    struct Node *tree;
-    StackNode *next;
+struct StackNode { 
+	struct Node *tree; 
+	StackNode *next; 
 };
 
 typedef StackNode *Stack;
 
-Stack CreateStack(){
+Stack CreateStack() {
     return NULL;
 }
 
-ิbool IsEmpty(Stack S){
-    return S == NULL
+bool IsEmpty(Stack S) {
+    return S == NULL;
 }
 
-void push(struct Node *tree, Stack &S){
-    StackNode *newnode = new StackNode;
-    newnode->tree = tree;
-    newnode->next = S;
-    S = newnode;
+void Push(struct Node *tnode, Stack &S) {
+    StackNode *temp = new StackNode;
+    temp->tree = tnode;
+    temp->next = S;
+    S = temp;
 }
 
-strct Node *Pop(Stack &S){
-    if(IsEmpty(S)){
-        return NULL;
-    }else{
-        StackNode *tmpcell = S;
-        struct Node *tree = S->tree;
-        S = S->next;
-        delete(tmpcell);
-        return tree;
-    }
+struct Node *Pop(Stack &S) {
+    if (IsEmpty(S)) {
+    	return NULL;	
+	} else {
+		StackNode *temp = S;
+    	struct Node *tnode = S->tree;
+    	S = S->next;
+    	delete (temp);
+    	return tnode;
+	}
 }
 
-struct Node *CreateTree(char value){
-    struct Node *newnode = new struct Node;
-    newnode->value = value;
-    newnode->left = newnode->right = NULL;
-    return newnode;
+struct Node *CreateTreeNode(char value) {
+    struct Node *tnode = new struct Node;
+    tnode->value = value;
+    tnode->left = tnode->right = NULL;
+    return tnode;
 }
 
-struct Node *BuildExpressionTree(const string &postfix){
+struct Node *BuildExpressionTree(const string &postfix) {
     Stack S = CreateStack();
-    for(char ch : postfix[i]){
-        char ch = postfix[i];
-        if(isalnum(ch)){
-            push(CreateTree(ch), S);
-        }else{
-            struct Node *newnode = CreateTree(ch);
-            newnode->right = Pop(S);
-            newnode->left = Pop(S);
-            push(newnode, S);
+    for (size_t i = 0 ; i < postfix.length() ; i++) {
+    	char ch = postfix[i];
+        if (isalnum(ch)) { 
+            Push(CreateTreeNode(ch), S);
+        } else { 
+            struct Node *newNode = CreateTreeNode(ch);
+            newNode->right = Pop(S);
+            newNode->left = Pop(S);
+            Push(newNode, S);
         }
     }
     return Pop(S);
+}
+
+void printPreOrder(struct Node *tree) {
+    if (tree == NULL){
+        return;
+    } else {
+        cout << tree->value << " ";
+        printPreOrder(tree->left);
+        printPreOrder(tree->right);
+    }
+    return;
+}
+
+void printInOrder(struct Node *tree) {
+    if (tree == NULL) {
+        return;
+    } else {
+        printInOrder(tree->left);
+        cout << tree->value << " ";
+        printInOrder(tree->right);
+    }
+    return;
+}
+
+void printPostOrder(struct Node *tree) {
+    if (tree == NULL) {
+        return;
+    } else {
+        printPostOrder(tree->left);
+        printPostOrder(tree->right);
+        cout << tree->value << " ";
+    }
+    return;
+}
+
+int main() {
+    string postfix;
+    cout << "Input : ";
+    getline(cin, postfix);
+    
+    string temp = "";
+    for (size_t i = 0; i < postfix.length(); i++) {
+        if (postfix[i] != ' ')
+            temp += postfix[i];
+    }
+    postfix = temp;
+
+    if (!postfix.empty() && postfix[postfix.length() - 1] == '.') {
+        postfix = postfix.substr(0, postfix.length() - 1);
+    }
+
+    struct Node *tree = BuildExpressionTree(postfix);
+
+    cout << "Preorder: ";
+    printPreOrder(tree);
+    cout << endl;
+
+    cout << "Inorder: ";
+    printInOrder(tree);
+    cout << endl;
+
+    cout << "Postorder: ";
+    printPostOrder(tree);
+    cout << endl;
+
+    return 0;
 }
