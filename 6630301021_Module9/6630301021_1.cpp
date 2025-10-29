@@ -89,13 +89,13 @@ void PrintInorder(struct Node *T){
         cout << T->value << " ";
         PrintInorder(T->right);
     }
+    return;
 }
 
 int findHeight(int x, struct Node *T) {
     if(T == NULL){
         return -1;
-    }
-    if(x == T->value){
+    }else if(x == T->value){
         return T->height;
     }else if (x < T->value){
         return findHeight(x, T->left); 

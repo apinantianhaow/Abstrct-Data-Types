@@ -15,8 +15,7 @@ void showAdj(){
     cout << "ADJACENCY LIST" << endl;
     for(int i = 0 ; i < 6 ; i++){
         cout << "#" << i << " : ";
-        struct record *p;
-        p = adj[i];
+        struct record *p = adj[i];
         while(p != NULL){
             cout << p->value << " ";
             p = p->next;
@@ -41,8 +40,7 @@ void InputAdj(){
                     adj[i]->value = stoi(str);
                     adj[i]->next = NULL;
                 }else{
-                    struct record *p;
-                    p = adj[i];
+                    struct record *p = adj[i];
                     while(p->next != NULL){
                         p = p->next;
                     }
@@ -60,8 +58,7 @@ void InputAdj(){
 void Selfloop(){
     cout << endl;
     for(int i = 0 ; i < 6 ; i++){
-        struct record *p;
-        p = adj[i];
+        struct record *p = adj[i];
         while(p != NULL){
             if(i == p->value){
                 cout << "Selfloop : " << i << endl;
