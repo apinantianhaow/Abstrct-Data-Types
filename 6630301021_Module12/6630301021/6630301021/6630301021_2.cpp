@@ -50,7 +50,7 @@ void ArrayToHeap(array<int,30> &A, int &heapsize){
     for(int i = heapsize / 2 ; i >= 1 ; i--){
         Heapify(A, i, heapsize);
     }
-    for(int i=1;i<=SizeOfHeap(A);i++){
+    for(int i = 1 ; i <= SizeOfHeap(A) ; i++){
         cout << A[i] << (i == SizeOfHeap(A) ? "" : " ");
     }
     cout << endl << endl;
@@ -77,7 +77,7 @@ void Heapsort(array<int,30> &A, int &heapsize){
     for(int i = heapsize ; i >= 1 ; i--){
         swap(A[1], A[i]);
         Heapify(A, 1, i - 1);
-        cout << "#" << i << (i > 9 ? " : " : "  : ");
+        cout << "#" << i << (i > 9 ? " : " : " : ");
         for(int j = 1 ; j <= SizeOfHeap(A) ; j++){
             cout << A[j] << (j == SizeOfHeap(A) ? "" : " ");
         }

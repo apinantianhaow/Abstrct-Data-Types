@@ -328,14 +328,12 @@ int main()
             outfile.close();
             break;
         case 5 :
-            {
-                readfile();
-                mergesort(data, tempArray, 0, NUM_ELEMENTS - 1);
-                cout << "Merge Sort success" << endl;
-                outfile.open("merge.txt");
-                for(int i=0; i < NUM_ELEMENTS; i++) { outfile << data[i] << " "; }
-                outfile.close();
-            }
+            readfile();
+            mergesort(data, tempArray, 0, NUM_ELEMENTS - 1);
+            cout << "Merge Sort success" << endl;
+            outfile.open("merge.txt");
+            for(int i=0; i < NUM_ELEMENTS; i++) { outfile << data[i] << " "; }
+            outfile.close();
             break;
         case 6 :
             readfile();

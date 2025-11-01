@@ -1,7 +1,6 @@
 //6630301021 Aphinan Thianhao
 
 #include <iostream>
-#include <string.h>
 using namespace std;
 
 struct Node;
