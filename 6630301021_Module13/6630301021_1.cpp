@@ -305,10 +305,7 @@ int main()
             selectionsort(data, NUM_ELEMENTS);
             cout << "Selection Sort success" << endl;
             outfile.open("selection.txt");
-            for(int i=0; i < NUM_ELEMENTS; i++)
-            {
-                outfile << data[i] << " ";
-            }
+            for(int i=0; i < NUM_ELEMENTS; i++) { outfile << data[i] << " "; }
             outfile.close();
             break;
         case 3:
